@@ -14,21 +14,17 @@ class BooksApp extends React.Component {
   componentDidMount(){
     BooksAPI.getAll().then((books) => {
       this.setState({books})
-      
     })
   }
 
   render() {
     return (
       <div className="app">
-        <Route path='/' render= {() => (
+        <Route exact path='/' render= {() => (
           <BookShelves />
         )}
         />
-        <Route path = '/search' render = {() => (
-          <SearchPage />
-        )}
-        />
+        <Route path = '/search' component = {SearchPage}/>
       </div>
       )
     }
