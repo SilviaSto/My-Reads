@@ -3,9 +3,15 @@ import Book from './Book';
 import {Link} from 'react-router-dom'
 
 class BookShelves extends Component {
-      
+  
+    /*constructor (props) {
+      super (props);
+        this.title = 'Me',
+        this.authors = ['Ivan'],
+        this.thumbnail = '';
+    }*/
+            
     render (){
-       
         return(
         <div className="list-books">
 
@@ -19,9 +25,12 @@ class BookShelves extends Component {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                        <li>
-                          <Book />
-                      </li>
+                      {this.props.books.map((book) => (
+                      <li key = {book.id}>
+                        <Book title = {book.title} authors= {book.authors} thumbnail = {book.imageLinks.thumbnail} />
+                      </li>))
+                      }
+                        
                       
                     </ol>
                   </div>
@@ -31,9 +40,11 @@ class BookShelves extends Component {
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li>
-                        <Book />
-                      </li>
+                    {this.props.books.map((book) => (
+                      <li key = {book.id}>
+                        <Book title = {book.title} authors= {book.authors} thumbnail = {book.imageLinks.thumbnail} />
+                      </li>))
+                      }
                     </ol>
                   </div>
                 </div>
@@ -42,9 +53,11 @@ class BookShelves extends Component {
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      <li>
-                        <Book />
-                      </li>
+                      {this.props.books.map((book) => (
+                        <li key = {book.id}>
+                          <Book title = {book.title} authors= {book.authors} thumbnail = {book.imageLinks.thumbnail} />
+                        </li>))
+                        }
                     </ol>
                   </div>
                 </div>
