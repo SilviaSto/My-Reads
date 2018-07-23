@@ -1,16 +1,9 @@
 import React, {Component} from 'react';
 import Book from './Book';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-class BookShelves extends Component {
-  
-    /*constructor (props) {
-      super (props);
-        this.title = 'Me',
-        this.authors = ['Ivan'],
-        this.thumbnail = '';
-    }*/
-            
+class BookShelves extends Component {          
     render (){
         return(
         <div className="list-books">
@@ -27,11 +20,11 @@ class BookShelves extends Component {
                     <ol className="books-grid">
                       {this.props.books.map((book) => (
                       <li key = {book.id}>
-                        <Book title = {book.title} authors= {book.authors} thumbnail = {book.imageLinks.thumbnail} />
+                        <Book title = {book.title} 
+                        authors= {book.authors} 
+                        thumbnail = {book.imageLinks.thumbnail}/>
                       </li>))
                       }
-                        
-                      
                     </ol>
                   </div>
                 </div>
@@ -73,5 +66,10 @@ class BookShelves extends Component {
         );
     }
 }
+
+BookShelves.propTypes = {
+  books: PropTypes.array.isRequired
+}
+
 
 export default BookShelves;
