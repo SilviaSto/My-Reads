@@ -4,11 +4,14 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class BookShelves extends Component {
+
   static propTypes = {
     books: PropTypes.array.isRequired
   }
-  
-    render (){
+
+     render (){
+       let books = this.props.books;
+
         return(
         <div className="list-books">
 
@@ -18,15 +21,16 @@ class BookShelves extends Component {
 
             <div className="list-books-content">
               <div>
+
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      {this.props.books.map((book) => (
+                    {books.filter((book) => book.shelf === 'currentlyReading')
+                      .map((book) => (
                       <li key = {book.id}>
-                        <Book title = {book.title} 
-                        authors= {book.authors} 
-                        thumbnail = {book.imageLinks.thumbnail}/>
+                        <Book book = {book}
+                        />
                       </li>))
                       }
                     </ol>
@@ -37,9 +41,12 @@ class BookShelves extends Component {
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.map((book) => (
+                    {books.filter(
+                      (book) => book.shelf === 'wantToRead')
+                      .map((book) => (
                       <li key = {book.id}>
-                        <Book title = {book.title} authors= {book.authors} thumbnail = {book.imageLinks.thumbnail} />
+                        <Book book = {book}
+                        />
                       </li>))
                       }
                     </ol>
@@ -50,11 +57,13 @@ class BookShelves extends Component {
                   <h2 className="bookshelf-title">Read</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                      {this.props.books.map((book) => (
-                        <li key = {book.id}>
-                          <Book title = {book.title} authors= {book.authors} thumbnail = {book.imageLinks.thumbnail} />
-                        </li>))
-                        }
+                    {books.filter((book) => book.shelf === 'read')
+                      .map((book) => (
+                      <li key = {book.id}>
+                        <Book book = {book}
+                        />
+                      </li>))
+                      }
                     </ol>
                   </div>
                 </div>
@@ -70,8 +79,6 @@ class BookShelves extends Component {
         );
     }
 }
-
-
 
 
 export default BookShelves;
