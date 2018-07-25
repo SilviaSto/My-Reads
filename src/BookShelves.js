@@ -26,10 +26,12 @@ class BookShelves extends Component {
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {books.filter((book) => book.shelf === 'currentlyReading')
+                    {books.filter((book) => book.shelf === 'currentlyReading') 
                       .map((book) => (
                       <li key = {book.id}>
-                        <Book book = {book}
+                        <Book
+                        book = {book}
+                        updateOptions = {this.props.updateOptions}
                         />
                       </li>))
                       }
@@ -45,7 +47,9 @@ class BookShelves extends Component {
                       (book) => book.shelf === 'wantToRead')
                       .map((book) => (
                       <li key = {book.id}>
-                        <Book book = {book}
+                        <Book
+                        book = {book}
+                        updateOptions = {this.props.updateOptions}
                         />
                       </li>))
                       }
@@ -60,7 +64,9 @@ class BookShelves extends Component {
                     {books.filter((book) => book.shelf === 'read')
                       .map((book) => (
                       <li key = {book.id}>
-                        <Book book = {book}
+                        <Book
+                        book = {book}
+                        updateOptions = {this.props.updateOptions}
                         />
                       </li>))
                       }

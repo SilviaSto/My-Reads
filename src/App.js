@@ -11,25 +11,36 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
-  componentDidMount(){
+componentDidMount(){
     BooksAPI.getAll().then((books) => {
       this.setState({books})
     })
   }
 
+updateOptions = (book, shelf) => {
+  BooksAPI.update(book, shelf)
+  .then(
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+    })
+  )
+}
+
   render() {
-    console.log(this.state.books)
+
     return (
       <div className="app">
         <Route exact path='/' render= {() => (
-          <BookShelves 
-          books = {this.state.books}/>
+          <BookShelves
+          books = {this.state.books}
+          updateOptions = {this.updateOptions}
+          />
         )}
         />
         <Route path = '/search' component = {SearchPage}/>
       </div>
       )
     }
-  }
+}
 
 export default BooksApp
