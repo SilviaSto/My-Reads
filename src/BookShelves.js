@@ -31,7 +31,7 @@ class BookShelves extends Component {
                       <li key = {book.id}>
                         <Book
                         book = {book}
-                        updateOptions = {this.props.updateOptions}
+                        selectOptions = {this.props.selectOptions}
                         />
                       </li>))
                       }
@@ -49,7 +49,7 @@ class BookShelves extends Component {
                       <li key = {book.id}>
                         <Book
                         book = {book}
-                        updateOptions = {this.props.updateOptions}
+                        selectOptions = {this.props.selectOptions}
                         />
                       </li>))
                       }
@@ -66,7 +66,7 @@ class BookShelves extends Component {
                       <li key = {book.id}>
                         <Book
                         book = {book}
-                        updateOptions = {this.props.updateOptions}
+                        selectOptions = {this.props.selectOptions}
                         />
                       </li>))
                       }
@@ -78,7 +78,7 @@ class BookShelves extends Component {
             </div>
 
             <div className="open-search">
-              <Link to='search' onClick={() => this.setState({ showSearchPage: true })}></Link>
+              <Link to='search'></Link>
             </div>
 
         </div>
