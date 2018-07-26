@@ -8,7 +8,6 @@ import {Route} from 'react-router-dom'
 class BooksApp extends React.Component {
   state = {
     books: [],
-    showSearchPage: false
   }
 
 updateData(){
@@ -36,7 +35,7 @@ updateOptions = (book, shelf) => {
         <Route exact path='/' render= {() => (
           <BookShelves
           books = {this.state.books}
-          updateOptions = {this.updateOptions}
+          selectOptions = {this.updateOptions}
           />
         )}
         />
