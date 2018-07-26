@@ -8,7 +8,9 @@ class SearchPage extends Component {
         return(
           <div className="search-books">
             <div className="search-books-bar">
-              <Link to='/' className="close-search">
+              <Link to='/'
+              className="close-search"
+              >
               Close
               </Link>
               <div className="search-books-input-wrapper">
@@ -21,10 +23,10 @@ class SearchPage extends Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 <input
-                type="text"
-                placeholder="Search by title or author"
-                value = {this.state.searchedText}
-                onChange={(event)=> event.target.value}
+                  type="text"
+                  placeholder="Search by title or author"
+                  value = {this.props.searchedText}
+                  onChange={(event)=> this.props.handleQuery(event.target.value)}
                 />
 
               </div>
@@ -36,6 +38,6 @@ class SearchPage extends Component {
         </div>
         );
     }
-}
+};
 
-export default SearchPage
+export default SearchPage;
