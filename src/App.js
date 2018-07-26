@@ -8,6 +8,8 @@ import {Route} from 'react-router-dom'
 class BooksApp extends React.Component {
   state = {
     books: [],
+    query: '',
+    searchedBooks:[]
   }
 
 updateData(){
@@ -25,24 +27,49 @@ updateOptions = (book, shelf) => {
   .then(
     this.updateData()
     )
-
 }
 
-  render() {
+handleQuery = (query)=> {
+  //indicates that there is a text
+  if(query){
+    this.setState({
+      query: query
+    });
+    console.log(query)
+  }
+}
 
-    return (
-      <div className="app">
-        <Route exact path='/' render= {() => (
+searchBook = (query) => {
+  BooksAPI.search(query)
+  .then()
+}
+
+render() {
+  let {books, query} = this.state;
+  return (
+    <div className="app">
+
+      <Route exact path='/'
+        render= {() => (
           <BookShelves
-          books = {this.state.books}
+          books = {books}
           selectOptions = {this.updateOptions}
           />
         )}
-        />
-        <Route path = '/search' component = {SearchPage}/>
-      </div>
-      )
-    }
+      />
+
+      <Route path = '/search'
+        render = {() => (
+          <SearchPage
+          searchedText = {query}
+          />
+        )}
+      />
+
+    </div>
+    )
+  }
 }
+
 
 export default BooksApp

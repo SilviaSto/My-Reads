@@ -5,7 +5,7 @@ class Book extends Component {
 
     render(){
 
-        let book = this.props.book;
+        let {book, selectOptions} = this.props;
 
         return(
             <div className="book">
@@ -18,7 +18,7 @@ class Book extends Component {
                     <select
                     value = {book.shelf}
                     onChange = {(event) =>
-                        {this.props.selectOptions(book, event.target.value)}
+                        {selectOptions(book, event.target.value)}
                         }>
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
@@ -38,6 +38,5 @@ class Book extends Component {
         );
     }
 }
-
 
 export default Book;
