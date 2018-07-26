@@ -30,7 +30,11 @@ class BookShelves extends Component {
                       .map((book) => (
                       <li key = {book.id}>
                         <Book
-                        book = {book}
+                        cover = {book.imageLinks.thumbnail}
+                        title = {book.title}
+                        authors = {book.authors}
+                        shelf = {book.shelf}
+                        book={book}
                         selectOptions = {selectOptions}
                         />
                       </li>))
@@ -48,7 +52,11 @@ class BookShelves extends Component {
                       .map((book) => (
                       <li key = {book.id}>
                         <Book
-                        book = {book}
+                        cover = {book.imageLinks.thumbnail}
+                        title = {book.title}
+                        authors = {book.authors}
+                        shelf = {book.shelf}
+                        book={book}
                         selectOptions = {selectOptions}
                         />
                       </li>))
@@ -65,7 +73,11 @@ class BookShelves extends Component {
                       .map((book) => (
                       <li key = {book.id}>
                         <Book
-                        book = {book}
+                        cover = {book.imageLinks.thumbnail}
+                        title = {book.title}
+                        authors = {book.authors}
+                        shelf = {book.shelf}
+                        book={book}
                         selectOptions = {selectOptions}
                         />
                       </li>))
