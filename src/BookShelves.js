@@ -10,7 +10,7 @@ class BookShelves extends Component {
   }
 
      render (){
-       let books = this.props.books;
+       let {books, selectOptions} = this.props;
 
         return(
         <div className="list-books">
@@ -31,7 +31,7 @@ class BookShelves extends Component {
                       <li key = {book.id}>
                         <Book
                         book = {book}
-                        selectOptions = {this.props.selectOptions}
+                        selectOptions = {selectOptions}
                         />
                       </li>))
                       }
@@ -49,7 +49,7 @@ class BookShelves extends Component {
                       <li key = {book.id}>
                         <Book
                         book = {book}
-                        selectOptions = {this.props.selectOptions}
+                        selectOptions = {selectOptions}
                         />
                       </li>))
                       }
@@ -66,7 +66,7 @@ class BookShelves extends Component {
                       <li key = {book.id}>
                         <Book
                         book = {book}
-                        selectOptions = {this.props.selectOptions}
+                        selectOptions = {selectOptions}
                         />
                       </li>))
                       }

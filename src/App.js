@@ -8,6 +8,7 @@ import {Route} from 'react-router-dom'
 class BooksApp extends React.Component {
   state = {
     books: [],
+    query:''
   }
 
 updateData(){
@@ -25,21 +26,35 @@ updateOptions = (book, shelf) => {
   .then(
     this.updateData()
     )
+}
 
+searchBook = (query) => {
+  BooksAPI.search(query)
+  .then()
 }
 
   render() {
-
+    let {books, query} = this.state;
     return (
       <div className="app">
-        <Route exact path='/' render= {() => (
-          <BookShelves
-          books = {this.state.books}
-          selectOptions = {this.updateOptions}
-          />
-        )}
+
+        <Route exact path='/'
+          render= {() => (
+            <BookShelves
+            books = {books}
+            selectOptions = {this.updateOptions}
+            />
+          )}
         />
-        <Route path = '/search' component = {SearchPage}/>
+
+        <Route path = '/search'
+          render = {() => (
+            <SearchPage
+            searchedText = {query}
+            />
+          )}
+        />
+
       </div>
       )
     }
