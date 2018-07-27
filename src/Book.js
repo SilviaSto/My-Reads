@@ -8,21 +8,27 @@ class Book extends Component {
         let {cover,
             book,
             shelf,
-            selectOptions} = this.props;
+            title,
+            selectOptions,
+            authors
+            } = this.props;
 
         return(
             <div className="book">
                 <div className="book-top">
                 <div className="book-cover" 
-                style={{ width: 128, height: 193, backgroundImage: `url(${cover})`}}>
+                    style={{ width: 128,
+                        height: 193,
+                        backgroundImage: `url(${cover ? book.imageLinks.thumbnail : "No cover"})`}}>
                 </div>
 
                 <div className="book-shelf-changer">
                     <select
-                    value = {shelf}
-                    onChange = {(event) =>
-                        {selectOptions(book, event.target.value)}
-                        }>
+                        value = {shelf}
+                        onChange = {(event) =>
+                            {selectOptions(book, event.target.value)}
+                        }
+                    >
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
@@ -34,8 +40,8 @@ class Book extends Component {
 
                 </div>
 
-                <div className="book-title">{this.props.title}</div>
-                <div className="book-authors">{this.props.authors}</div>
+                <div className="book-title">{title}</div>
+                <div className="book-authors">{authors}</div>
 
             </div>
         );
