@@ -1,10 +1,16 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import Book from './Book';
 
 
 
 class SearchPage extends Component {
     render(){
+      let {searchedTerm,
+        inputText,
+        selectOptions,
+        searchedBooks} = this.props;
+
         return(
           <div className="search-books">
             <div className="search-books-bar">
@@ -25,14 +31,27 @@ class SearchPage extends Component {
                 <input
                   type="text"
                   placeholder="Search by title or author"
-                  value = {this.props.searchedText}
-                  onChange={(event)=> this.props.handleQuery(event.target.value)}
+                  value = {inputText}
+                  onChange={(event)=> searchedTerm(event.target.value)}
                 />
 
               </div>
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
+              {searchedBooks.map((book) => (
+                <li key = {book.id}>
+                  <Book
+                    cover = {book.imageLinks}
+                    title = {book.title}
+                    authors = {book.authors}
+                    shelf = {book.shelf||'none'}
+                    book={book}
+                    selectOptions = {selectOptions}
+                    searchedBooks={searchedBooks}
+                  />
+                </li>))
+              }
               </ol>
             </div>
         </div>
