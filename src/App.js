@@ -16,9 +16,9 @@ class BooksApp extends React.Component {
 
 updateData(){
   BooksAPI.getAll().then((books) => {
-    this.setState({books})
+    this.setState({books});
   });
-}
+};
 
 componentDidMount(){
     this.updateData();
@@ -28,20 +28,18 @@ updateOptions = (book, shelf) => {
   BooksAPI.update(book, shelf)
   .then(
     this.updateData()
-    )
+    );
 };
 
 searchedTerm = (query) => {
 //update the input text
     this.setState({
       query: query
-    })
-   console.log(query)
+    });
 //if there is a text search() is invoked
   if(query.length>0){
   const match = new RegExp(escapeRegExp(query), 'i');
     BooksAPI.search(query).then((searchedBooks) =>{
-      console.log('fast')
       this.setState({
         searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))
       })
@@ -54,7 +52,7 @@ searchedTerm = (query) => {
       })
       }, 1000);
   }
-}
+};
 
 
 render() {

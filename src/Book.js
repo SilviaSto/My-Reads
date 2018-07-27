@@ -19,12 +19,12 @@ class Book extends Component {
                 <div className="book-cover" 
                     style={{ width: 128,
                         height: 193,
-                        backgroundImage: `url(${cover ? book.imageLinks.thumbnail : "No cover"})`}}>
+                        backgroundImage: `url(${cover ? book.imageLinks.thumbnail : 'No Book cover'})`}}>
                 </div>
 
                 <div className="book-shelf-changer">
                     <select
-                        value = {shelf}
+                        defaultValue = {shelf||'none'}
                         onChange = {(event) =>
                             {selectOptions(book, event.target.value)}
                         }

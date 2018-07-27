@@ -45,7 +45,7 @@ class SearchPage extends Component {
                     cover = {book.imageLinks}
                     title = {book.title}
                     authors = {book.authors}
-                    shelf = {book.shelf||'none'}
+                    shelf = {book.shelf}
                     book={book}
                     selectOptions = {selectOptions}
                     searchedBooks={searchedBooks}
