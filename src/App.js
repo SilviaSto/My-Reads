@@ -37,21 +37,18 @@ searchedTerm = (query) => {
       query: query
     })
    console.log(query)
-
+//if there is a text invoke search()
   if(query){
   const match = new RegExp(escapeRegExp(query), 'i');
-  BooksAPI.search(query).then((searchedBooks) =>{
-    console.log(searchedBooks)
-    this.setState({
-      searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.authors))
-    })
+    BooksAPI.search(query).then((searchedBooks) =>{
+      console.log(searchedBooks)
       this.setState({
-        searchedBooks: searchedBooks
+        searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))
       })
-    })
+    });
   }else{
     this.setState({
-      searchedBooks: []
+      searchedBooks: [],
     })
   }
 }
@@ -78,6 +75,7 @@ render() {
           inputText = {query}
           searchedBooks = {searchedBooks}
           searchedTerm = {this.searchedTerm}
+          selectOptions = {this.updateOptions}
           />
         )}
       />
