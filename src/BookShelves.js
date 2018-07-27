@@ -31,7 +31,7 @@ class BookShelves extends Component {
                       .map((book) => (
                       <li key = {book.id}>
                         <Book
-                        cover = {book.imageLinks.thumbnail}
+                        cover = {book.imageLinks}
                         title = {book.title}
                         authors = {book.authors}
                         shelf = {book.shelf}
@@ -53,7 +53,7 @@ class BookShelves extends Component {
                       .map((book) => (
                       <li key = {book.id}>
                         <Book
-                        cover = {book.imageLinks.thumbnail}
+                        cover = {book.imageLinks}
                         title = {book.title}
                         authors = {book.authors}
                         shelf = {book.shelf}
@@ -74,7 +74,7 @@ class BookShelves extends Component {
                       .map((book) => (
                       <li key = {book.id}>
                         <Book
-                        cover = {book.imageLinks.thumbnail}
+                        cover = {book.imageLinks}
                         title = {book.title}
                         authors = {book.authors}
                         shelf = {book.shelf}
