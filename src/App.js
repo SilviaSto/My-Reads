@@ -37,19 +37,22 @@ searchedTerm = (query) => {
       query: query
     })
    console.log(query)
-//if there is a text invoke search()
-  if(query){
+//if there is a text search() is invoked
+  if(query.length>0){
   const match = new RegExp(escapeRegExp(query), 'i');
     BooksAPI.search(query).then((searchedBooks) =>{
-      console.log(searchedBooks)
+      console.log('fast')
       this.setState({
         searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))
       })
     });
   }else{
-    this.setState({
-      searchedBooks: [],
-    })
+    //if the text is deleted too fast the search result by first letter remains
+    setTimeout(()=>{
+      this.setState({
+        searchedBooks: []
+      })
+      }, 1000);
   }
 }
 
