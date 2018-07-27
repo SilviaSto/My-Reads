@@ -1,9 +1,10 @@
 import React from 'react';
-import * as BooksAPI from './BooksAPI';
 import './App.css';
+import * as BooksAPI from './BooksAPI';
 import SearchPage from './SearchPage';
 import BookShelves from './BookShelves';
 import {Route} from 'react-router-dom';
+import escapeRegExp from 'escape-string-regexp';
 
 class BooksApp extends React.Component {
 
@@ -21,7 +22,7 @@ updateData(){
 
 componentDidMount(){
     this.updateData();
-  };
+};
 
 updateOptions = (book, shelf) => {
   BooksAPI.update(book, shelf)
@@ -30,22 +31,35 @@ updateOptions = (book, shelf) => {
     )
 };
 
-//updates input text
-updateQuery = (query)=> {
+searchedTerm = (query) => {
+//update the input text
     this.setState({
       query: query
-    });
+    })
    console.log(query)
-};
 
+  if(query){
+  const match = new RegExp(escapeRegExp(query), 'i');
+  BooksAPI.search(query).then((searchedBooks) =>{
+    console.log(searchedBooks)
+    this.setState({
+      searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.authors))
+    })
+      this.setState({
+        searchedBooks: searchedBooks
+      })
+    })
+  }else{
+    this.setState({
+      searchedBooks: []
+    })
+  }
+}
 
-searchBook = (query) => {
-  BooksAPI.search(query)
-  .then()
-};
 
 render() {
-  let {books, query} = this.state;
+  let {books, query, searchedBooks} = this.state;
+
   return (
     <div className="app">
 
@@ -61,8 +75,9 @@ render() {
       <Route path = '/search'
         render = {() => (
           <SearchPage
-          searchedText = {query}
-          handleQuery = {this.updateQuery}
+          inputText = {query}
+          searchedBooks = {searchedBooks}
+          searchedTerm = {this.searchedTerm}
           />
         )}
       />
