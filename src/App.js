@@ -53,7 +53,7 @@ searchedTerm = (query) => {
       setTimeout(()=>{
         this.setState({
           searchedBooks: [],
-          error: 'You see this message because the book you looking for doesn\'t exist in our library, or you have a typo.'
+          error: 'You see this message because the book you are looking for doesn\'t exist in our library, or you have a typo.'//not the best message :(
         })
       })
       
