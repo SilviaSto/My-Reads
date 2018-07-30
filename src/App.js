@@ -14,22 +14,25 @@ class BooksApp extends React.Component {
     searchedBooks:[]
   };
 
-updateData(){
+//after the App component has been rendered to the DOM a predefined collection of seven books with pre-selected shelves has been added.
+componentDidMount(){
   BooksAPI.getAll().then((books) => {
     this.setState({books});
   });
 };
 
-componentDidMount(){
-    this.updateData();
-};
-
 updateOptions = (book, shelf) => {
-  BooksAPI.update(book, shelf)
-  .then(
-    this.updateData()
-    );
-};
+    console.log(book.shelf, shelf);//current shelf, updated shelf
+
+    BooksAPI.update(book, shelf).then(()=>{
+      book.shelf = shelf; //assign the updated shelf 
+      this.setState(prevState =>({
+        books: prevState.books.filter((prevBook)=>prevBook.id!==book.id).concat([book]) //filter all books that have different id from previous state and add them to a new array. Then concatenate the filtered books with the updated books in a new array.
+      }));
+    });
+  }
+
+
 
 searchedTerm = (query) => {
 //update the input text
@@ -38,10 +41,10 @@ searchedTerm = (query) => {
     });
 //if there is a text search() is invoked
   if(query.length>0){
-  const match = new RegExp(escapeRegExp(query), 'i');
+  const match = new RegExp(escapeRegExp(query), 'i');//case insensitive
     BooksAPI.search(query).then((searchedBooks) =>{
       this.setState({
-        searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))
+        searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))//new array with maching titles.
       })
     });
   }else{
@@ -50,10 +53,15 @@ searchedTerm = (query) => {
       this.setState({
         searchedBooks: []
       })
-      }, 1000);
+      }, 1500);
   }
 };
 
+checkId=(book, searchedBook)=>{
+    if(searchedBook.id === book.id){
+      searchedBook.shelf = book.shelf
+    }
+}
 
 render() {
   let {books, query, searchedBooks} = this.state;
