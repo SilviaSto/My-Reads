@@ -11,7 +11,8 @@ class BooksApp extends React.Component {
   state = {
     books: [],
     query: '',
-    searchedBooks:[]
+    searchedBooks:[],
+    error: ''
   };
 
 //after the App component has been rendered to the DOM a predefined collection of seven books with pre-selected shelves has been added.
@@ -46,12 +47,25 @@ searchedTerm = (query) => {
       this.setState({
         searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))//new array with maching titles.
       })
-    });
+
+     
+    }).catch(()=>{
+      setTimeout(()=>{
+        this.setState({
+          searchedBooks: [],
+          error: 'You see this message because the book you looking for doesn\'t exist in our library, or you have a typo.'
+        })
+      })
+      
+      console.log('error')
+    })
+    
   }else{
-    //if the text is deleted too fast the search result by first letter remains
+    //if the text is deleted too fast the search result by first letter remains or the error text is still displayed
     setTimeout(()=>{
       this.setState({
-        searchedBooks: []
+        searchedBooks: [],
+        error: ''
       })
       }, 1500);
   }
@@ -64,7 +78,7 @@ checkId=(book, searchedBook)=>{
 }
 
 render() {
-  let {books, query, searchedBooks} = this.state;
+  let {books, query, searchedBooks, error} = this.state;
 
   return (
     <div className="app">
@@ -85,6 +99,7 @@ render() {
           searchedBooks = {searchedBooks}
           searchedTerm = {this.searchedTerm}
           selectOptions = {this.updateOptions}
+          error = {error}
           />
         )}
       />

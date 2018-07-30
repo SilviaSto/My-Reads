@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Book from './Book';
+import PropTypes from 'prop-types';
 
 
 
 class SearchPage extends Component {
+  static propTypes = {
+    searchedBooks: PropTypes.array.isRequired
+
+  }
+
     render(){
       let {searchedTerm,
         inputText,
         selectOptions,
-        searchedBooks} = this.props;
+        searchedBooks,
+        error} = this.props;
+
 
         return(
           <div className="search-books">
@@ -39,19 +47,22 @@ class SearchPage extends Component {
             </div>
             <div className="search-books-results">
               <ol className="books-grid">
-              {searchedBooks.map((book) => (
+
+              {searchedBooks
+              .map((book) => (
                 <li key = {book.id}>
                   <Book
                     cover = {book.imageLinks}
                     title = {book.title}
                     authors = {book.authors}
-                    shelf = {book.shelf}
                     book={book}
+                    shelf = {book.shelf}
                     selectOptions = {selectOptions}
-                    searchedBooks={searchedBooks}
                   />
-                </li>))
-              }
+              </li>))}
+
+              {error}
+
               </ol>
             </div>
         </div>
