@@ -5,12 +5,13 @@ class Book extends Component {
 
     render(){
 
+       // console.log(this.props.book.shelf)
         let {cover,
             book,
             shelf,
             title,
-            selectOptions,
-            authors
+            authors,
+            selectOptions
             } = this.props;
 
         return(
@@ -24,7 +25,7 @@ class Book extends Component {
 
                 <div className="book-shelf-changer">
                     <select
-                        defaultValue = {shelf||'none'}
+                        value = {shelf}
                         onChange = {(event) =>
                             {selectOptions(book, event.target.value)}
                         }
