@@ -48,14 +48,13 @@ searchedTerm = (query) => {
         searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))//new array with maching titles.
       })
 
-     
     }).catch(()=>{
       setTimeout(()=>{
         this.setState({
           searchedBooks: [],
           error: 'You see this message because the book you are looking for doesn\'t exist in our library, or you have a typo.'//not the best message :(
         })
-      })
+      }, 500)
       
       console.log('error')
     })
@@ -71,11 +70,13 @@ searchedTerm = (query) => {
   }
 };
 
-checkId=(book, searchedBook)=>{
+/*checkId=(book, searchedBook)=>{
     if(searchedBook.id === book.id){
       searchedBook.shelf = book.shelf
+    }else{
+      searchedBook.shelf = 'none'
     }
-}
+}*/
 
 render() {
   let {books, query, searchedBooks, error} = this.state;

@@ -8,15 +8,18 @@ import PropTypes from 'prop-types';
 class SearchPage extends Component {
   static propTypes = {
     searchedBooks: PropTypes.array.isRequired
-
   }
 
+
     render(){
+
       let {searchedTerm,
         inputText,
         selectOptions,
         searchedBooks,
         error} = this.props;
+
+      
 
 
         return(
