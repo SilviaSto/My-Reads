@@ -12,7 +12,7 @@ class BooksApp extends React.Component {
     books: [],
     query: '',
     searchedBooks:[],
-    error: ''
+    error: '',
   };
 
 //after the App component has been rendered to the DOM a predefined collection of seven books with pre-selected shelves has been added.
@@ -34,7 +34,6 @@ updateOptions = (book, shelf) => {
   }
 
 
-
 searchedTerm = (query) => {
 //update the input text
     this.setState({
@@ -45,18 +44,17 @@ searchedTerm = (query) => {
   const match = new RegExp(escapeRegExp(query), 'i');//case insensitive
     BooksAPI.search(query).then((searchedBooks) =>{
       this.setState({
-        searchedBooks: searchedBooks.filter((searchedBook)=>match.test(searchedBook.title))//new array with maching titles.
+        searchedBooks: searchedBooks.filter(
+          (searchedBook)=>match.test(searchedBook.authors)||match.test(searchedBook.title))//new array with maching titles or name of authors.
       })
-
-    }).catch(()=>{
+    })
+    .catch(()=>{
       setTimeout(()=>{
         this.setState({
           searchedBooks: [],
           error: 'You see this message because the book you are looking for doesn\'t exist in our library, or you have a typo.'//not the best message :(
         })
       }, 500)
-      
-      console.log('error')
     })
     
   }else{
@@ -70,16 +68,12 @@ searchedTerm = (query) => {
   }
 };
 
-/*checkId=(book, searchedBook)=>{
-    if(searchedBook.id === book.id){
-      searchedBook.shelf = book.shelf
-    }else{
-      searchedBook.shelf = 'none'
-    }
-}*/
 
 render() {
-  let {books, query, searchedBooks, error} = this.state;
+  let {books,
+      query,
+      searchedBooks,
+      error} = this.state;
 
   return (
     <div className="app">
@@ -109,6 +103,5 @@ render() {
     );
   };
 };
-
 
 export default BooksApp;
