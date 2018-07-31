@@ -54,7 +54,7 @@ searchedTerm = (query) => {
          this.state.books.forEach(book =>{
           if(searchedBook.id === book.id){
             searchedBook.shelf = book.shelf;
-            console.log(searchedBook.shelf, searchedBook.id, book.id)
+            //console.log(searchedBook.shelf, searchedBook.id, book.id)
               this.setState(prevState=>({
                 searchedBooks: prevState.searchedBooks.filter((psearchedBook)=>psearchedBook.shelf!==searchedBook.shelf).concat([searchedBook])
               }))
@@ -75,7 +75,7 @@ searchedTerm = (query) => {
     })
     
   }else{
-    //if the text is deleted too fast the search result by first letter remains or the error text is still displayed
+    //if the text is deleted too fast the result searched by first letter remains or the error text is still displayed
     setTimeout(()=>{
       this.setState({
         searchedBooks: [],
