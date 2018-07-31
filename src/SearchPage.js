@@ -55,7 +55,7 @@ class SearchPage extends Component {
                     title = {searchedBook.title}
                     authors = {searchedBook.authors}
                     book={searchedBook}
-                    shelf = {searchedBook.shelf||'none'}
+                    shelf = {searchedBook.shelf}
                     selectOptions = {selectOptions}
                   />
               </li>))}
