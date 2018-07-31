@@ -10,17 +10,13 @@ class SearchPage extends Component {
     searchedBooks: PropTypes.array.isRequired
   }
 
-
     render(){
 
       let {searchedTerm,
-        inputText,
-        selectOptions,
-        searchedBooks,
-        error} = this.props;
-
-      
-
+          inputText,
+          selectOptions,
+          searchedBooks,
+          error} = this.props;
 
         return(
           <div className="search-books">
@@ -52,14 +48,14 @@ class SearchPage extends Component {
               <ol className="books-grid">
 
               {searchedBooks
-              .map((book) => (
-                <li key = {book.id}>
+              .map((searchedBook) => (
+                <li key = {searchedBook.id}>
                   <Book
-                    cover = {book.imageLinks}
-                    title = {book.title}
-                    authors = {book.authors}
-                    book={book}
-                    shelf = {book.shelf}
+                    cover = {searchedBook.imageLinks}
+                    title = {searchedBook.title}
+                    authors = {searchedBook.authors}
+                    book={searchedBook}
+                    shelf = {searchedBook.shelf||'none'}
                     selectOptions = {selectOptions}
                   />
               </li>))}
