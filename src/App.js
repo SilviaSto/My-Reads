@@ -43,10 +43,27 @@ searchedTerm = (query) => {
   if(query.length>0){
   const match = new RegExp(escapeRegExp(query), 'i');//case insensitive
     BooksAPI.search(query).then((searchedBooks) =>{
+
       this.setState({
         searchedBooks: searchedBooks.filter(
           (searchedBook)=>match.test(searchedBook.authors)||match.test(searchedBook.title))//new array with maching titles or name of authors.
       })
+      //compare book's ids and assign selected shelf if the book is already in collection 
+      searchedBooks.forEach((searchedBook)=>{
+
+         this.state.books.forEach(book =>{
+          if(searchedBook.id === book.id){
+            searchedBook.shelf = book.shelf;
+            console.log(searchedBook.shelf, searchedBook.id, book.id)
+              this.setState(prevState=>({
+                searchedBooks: prevState.searchedBooks.filter((psearchedBook)=>psearchedBook.shelf!==searchedBook.shelf).concat([searchedBook])
+              }))
+          }
+            return;
+      })
+      return;
+    }
+  )
     })
     .catch(()=>{
       setTimeout(()=>{
