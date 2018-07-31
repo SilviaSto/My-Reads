@@ -23,7 +23,7 @@ componentDidMount(){
 };
 
 updateOptions = (book, shelf) => {
-    console.log(book.shelf, shelf);//current shelf, updated shelf
+    //console.log(book.shelf, shelf); =>current shelf, updated shelf
 
     BooksAPI.update(book, shelf).then(()=>{
       book.shelf = shelf; //assign the updated shelf 
@@ -48,10 +48,12 @@ searchedTerm = (query) => {
         searchedBooks: searchedBooks.filter(
           (searchedBook)=>match.test(searchedBook.authors)||match.test(searchedBook.title))//new array with maching titles or name of authors.
       })
+
       //compare book's ids and assign selected shelf if the book is already in collection 
       searchedBooks.forEach((searchedBook)=>{
 
          this.state.books.forEach(book =>{
+
           if(searchedBook.id === book.id){
             searchedBook.shelf = book.shelf;
             //console.log(searchedBook.shelf, searchedBook.id, book.id)
@@ -60,10 +62,9 @@ searchedTerm = (query) => {
               }))
           }
             return;
+        })
+        return;
       })
-      return;
-    }
-  )
     })
     .catch(()=>{
       setTimeout(()=>{
